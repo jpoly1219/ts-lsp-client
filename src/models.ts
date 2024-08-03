@@ -475,7 +475,7 @@ interface TextEdit {
   newText: string;
 }
 
-interface Range {
+export interface Range {
   /**
    * The range's start position.
    */
@@ -487,7 +487,7 @@ interface Range {
   end: Position;
 }
 
-interface Position {
+export interface Position {
   /**
    * Line position in a document (zero-based).
    */
