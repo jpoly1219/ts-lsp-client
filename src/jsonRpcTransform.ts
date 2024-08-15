@@ -87,7 +87,6 @@ export class JSONRPCTransform extends Transform {
         const isCtyp = contentTypeRe.test(ctyp.toString(encoding));
         const isNoCtyp = crlfRe.test(noCtyp.toString(encoding));
 
-        // console.log(`ctyp parsing:\n${ctyp.toString(encoding)}, ${noCtyp.toString(encoding)}, ${isCtyp}, ${isNoCtyp}`)
         if (!isNoCtyp && !isCtyp) {
           done(new Error(`[_transform] Bad header: ${this._curChunk.toString(encoding)}`));
           return;
@@ -99,8 +98,6 @@ export class JSONRPCTransform extends Transform {
 
         if (isCtyp) {
           const index = this._curChunk.toString(encoding).search(suffixRe);
-          // console.log(index)
-          // console.log(this._curChunk.toString(encoding))
           if (index === -1) {
             done(new Error(`[_transform] Bad header: ${this._curChunk.toString(encoding)}`));
             return;
@@ -111,22 +108,6 @@ export class JSONRPCTransform extends Transform {
 
         this._state = 'jsonrpc';
       }
-
-      // if (this._state === 'content-type') {
-      //   let position = this._curChunk.length;
-      //   const noCtyp = this._curChunk.slice(position, position + crlfLength);
-      //   const ctyp = this._curChunk.slice(position, position + contentTypeLength);
-      //   if (crlfRe.test(noCtyp.toString(encoding))) {
-      //     this._curChunk = this._curChunk.slice(position + crlfLength);
-      //     this._state = 'jsonrpc';
-      //   } else if (contentTypeRe.test(ctyp.toString(encoding))) {
-      //     position +=
-      //   } else {
-      //     done(new Error(`[_transform] Bad header: ${this._curChunk.toString(encoding)}`));
-      //     return;
-      //   }
-      //   // !suffixRe.test(this._curChunk.slice(position, position + suffixLength).toString(encoding))
-      // }
 
       if (this._state === 'jsonrpc') {
         if (this._curChunk.length >= this._curContentLength) {
