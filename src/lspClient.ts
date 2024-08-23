@@ -26,7 +26,8 @@ import {
   InlayHintParams,
   InlayHint,
   TypeHierarchyPrepareParams,
-  TypeHierarchyItem
+  TypeHierarchyItem,
+  OcamlTypedHoleParams
 } from "./models";
 import { once } from 'events';
 export class LspClient {
@@ -107,5 +108,10 @@ export class LspClient {
 
   public prepareTypeHierarchy(params: TypeHierarchyPrepareParams): PromiseLike<TypeHierarchyItem[] | null> {
     return this.endpoint.send('textDocument/prepareTypeHierarchy', params);
+  }
+
+  // ocaml
+  public ocamlTypedHole(params: OcamlTypedHoleParams): PromiseLike<Range[] | null> {
+    return this.endpoint.send('ocamllsp/typedHoles', params);
   }
 }

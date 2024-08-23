@@ -3819,3 +3819,7 @@ export interface TypeHierarchyItem {
    */
   data?: LSPAny;
 }
+
+export interface OcamlTypedHoleParams {
+  uri: DocumentUri;
+}
