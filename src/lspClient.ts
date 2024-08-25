@@ -27,7 +27,8 @@ import {
   InlayHint,
   TypeHierarchyPrepareParams,
   TypeHierarchyItem,
-  OcamlTypedHoleParams
+  OcamlTypedHoleParams,
+  Range
 } from "./models";
 import { once } from 'events';
 export class LspClient {
