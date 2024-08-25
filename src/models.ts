@@ -3987,3 +3987,16 @@ export interface OcamlMerlinCallCompatibleResponse {
   resultAsSexp: boolean;
   result: string;
 }
+
+export interface OcamlTypeEnclosingParams {
+  uri: TextDocumentIdentifier;
+  at: (Position | Range);
+  index: number;
+  verbosity?: number;
+}
+
+export interface OcamlTypeEnclosingResponse {
+  enclosings: Range[];
+  index: number;
+  type: string;
+}

@@ -34,7 +34,9 @@ import {
   OcamlHoverExtendedParams,
   OcamlInferIntfParams,
   OcamlMerlinCallCompatibleParams,
-  OcamlMerlinCallCompatibleResponse
+  OcamlMerlinCallCompatibleResponse,
+  OcamlTypeEnclosingParams,
+  OcamlTypeEnclosingResponse
 } from "./models";
 import { once } from 'events';
 export class LspClient {
@@ -136,5 +138,9 @@ export class LspClient {
 
   public ocamlMerlinCallCompatible(params: OcamlMerlinCallCompatibleParams): PromiseLike<OcamlMerlinCallCompatibleResponse> {
     return this.endpoint.send('ocamllsp/merlinCallCompatible', params);
+  }
+
+  public ocamlTypeEnclosing(params: OcamlTypeEnclosingParams): PromiseLike<OcamlTypeEnclosingResponse> {
+    return this.endpoint.send('ocamllsp/typeEnclosing', params);
   }
 }
