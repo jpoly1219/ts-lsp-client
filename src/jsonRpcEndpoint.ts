@@ -23,12 +23,14 @@ export class JSONRPCEndpoint extends EventEmitter {
     this.client = new JSONRPCClient(async (jsonRPCRequest) => {
       const jsonRPCRequestStr = JSON.stringify(jsonRPCRequest);
       Logger.log(`sending: ${jsonRPCRequestStr}`, LoggerLevel.DEBUG);
+      // console.log(`sending: ${jsonRPCRequestStr}\n`);
       this.writable.write(`Content-Length: ${jsonRPCRequestStr.length}\r\n\r\n${jsonRPCRequestStr}`);
     }, createId);
 
     this.readableByline.on('data', (jsonRPCResponseOrRequest: string) => {
       const jsonrpc = JSON.parse(jsonRPCResponseOrRequest);
       Logger.log(`[transform] ${jsonRPCResponseOrRequest}`, LoggerLevel.DEBUG);
+      // console.log(`[transform] ${jsonRPCResponseOrRequest}\n`);
 
       if (Object.prototype.hasOwnProperty.call(jsonrpc, 'id')) {
         const jsonRPCResponse: JSONRPCResponse = jsonrpc as JSONRPCResponse;
@@ -36,7 +38,8 @@ export class JSONRPCEndpoint extends EventEmitter {
           this.client.receive(jsonRPCResponse);
         } else {
           Logger.log(`[transform] ${jsonRPCResponseOrRequest}`, LoggerLevel.ERROR);
-          this.emit('error', `[transform] Received id mismatch! Got ${jsonRPCResponse.id}, expected ${this.nextId - 1}`);
+          // console.log(`[transform] ${jsonRPCResponseOrRequest}\n`);
+          // this.emit('error', `[transform] Received id mismatch! Got ${jsonRPCResponse.id}, expected ${this.nextId - 1}`);
         }
       } else {
         const jsonRPCRequest: JSONRPCRequest = jsonrpc as JSONRPCRequest;
