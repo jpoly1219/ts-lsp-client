@@ -3822,10 +3822,6 @@ export interface TypeHierarchyItem {
   data?: LSPAny;
 }
 
-export interface OcamlTypedHoleParams {
-  uri: DocumentUri;
-}
-
 export interface Diagnostic {
   /**
    * The range at which the message applies.
@@ -3965,3 +3961,14 @@ export interface RelatedFullDocumentDiagnosticReport extends FullDocumentDiagnos
 export interface RelatedUnchangedDocumentDiagnosticReport extends UnchangedDocumentDiagnosticReport {
   relatedDocuments?: FullDocumentDiagnosticReport | UnchangedDocumentDiagnosticReport;
 }
+
+export interface OcamlTypedHoleParams {
+  uri: DocumentUri;
+}
+
+export interface OcamlHoverExtendedParams {
+  textDocument: TextDocumentIdentifier;
+  position: Position;
+  verbosity?: number;
+}
+

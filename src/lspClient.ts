@@ -27,10 +27,11 @@ import {
   InlayHint,
   TypeHierarchyPrepareParams,
   TypeHierarchyItem,
-  OcamlTypedHoleParams,
   Range,
   DocumentDiagnosticParams,
-  DocumentDiagnosticReport
+  DocumentDiagnosticReport,
+  OcamlTypedHoleParams,
+  OcamlHoverExtendedParams
 } from "./models";
 import { once } from 'events';
 export class LspClient {
@@ -113,12 +114,16 @@ export class LspClient {
     return this.endpoint.send('textDocument/prepareTypeHierarchy', params);
   }
 
+  public diagnostics(params: DocumentDiagnosticParams): PromiseLike<DocumentDiagnosticReport | null> {
+    return this.endpoint.send('textDocument/diagnostic', params);
+  }
+
   // ocaml
   public ocamlTypedHole(params: OcamlTypedHoleParams): PromiseLike<Range[] | null> {
     return this.endpoint.send('ocamllsp/typedHoles', params);
   }
 
-  public diagnostics(params: DocumentDiagnosticParams): PromiseLike<DocumentDiagnosticReport | null> {
-    return this.endpoint.send('textDocument/diagnostic', params);
+  public ocamlHoverExtended(params: OcamlHoverExtendedParams): PromiseLike<Hover> {
+    return this.endpoint.send('ocamllsp/hoverExtended', params);
   }
 }
