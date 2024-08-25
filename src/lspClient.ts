@@ -31,7 +31,8 @@ import {
   DocumentDiagnosticParams,
   DocumentDiagnosticReport,
   OcamlTypedHoleParams,
-  OcamlHoverExtendedParams
+  OcamlHoverExtendedParams,
+  OcamlInferIntfParams
 } from "./models";
 import { once } from 'events';
 export class LspClient {
@@ -119,11 +120,15 @@ export class LspClient {
   }
 
   // ocaml
-  public ocamlTypedHole(params: OcamlTypedHoleParams): PromiseLike<Range[] | null> {
+  public ocamlTypedHoles(params: OcamlTypedHoleParams): PromiseLike<Range[] | null> {
     return this.endpoint.send('ocamllsp/typedHoles', params);
   }
 
   public ocamlHoverExtended(params: OcamlHoverExtendedParams): PromiseLike<Hover> {
     return this.endpoint.send('ocamllsp/hoverExtended', params);
+  }
+
+  public ocamlInferIntf(params: OcamlInferIntfParams): PromiseLike<string | null> {
+    return this.endpoint.send('ocamllsp/inferIntf', params);
   }
 }

@@ -3972,3 +3972,6 @@ export interface OcamlHoverExtendedParams {
   verbosity?: number;
 }
 
+export interface OcamlInferIntfParams {
+  uri: DocumentUri;
+}
