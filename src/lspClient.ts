@@ -28,7 +28,9 @@ import {
   TypeHierarchyPrepareParams,
   TypeHierarchyItem,
   OcamlTypedHoleParams,
-  Range
+  Range,
+  DocumentDiagnosticParams,
+  DocumentDiagnosticReport
 } from "./models";
 import { once } from 'events';
 export class LspClient {
@@ -114,5 +116,9 @@ export class LspClient {
   // ocaml
   public ocamlTypedHole(params: OcamlTypedHoleParams): PromiseLike<Range[] | null> {
     return this.endpoint.send('ocamllsp/typedHoles', params);
+  }
+
+  public diagnostics(params: DocumentDiagnosticParams): PromiseLike<DocumentDiagnosticReport | null> {
+    return this.endpoint.send('textDocument/diagnostic', params);
   }
 }
