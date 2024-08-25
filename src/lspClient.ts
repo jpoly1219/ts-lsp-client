@@ -30,9 +30,11 @@ import {
   Range,
   DocumentDiagnosticParams,
   DocumentDiagnosticReport,
-  OcamlTypedHoleParams,
+  OcamlTypedHolesParams,
   OcamlHoverExtendedParams,
-  OcamlInferIntfParams
+  OcamlInferIntfParams,
+  OcamlMerlinCallCompatibleParams,
+  OcamlMerlinCallCompatibleResponse
 } from "./models";
 import { once } from 'events';
 export class LspClient {
@@ -120,7 +122,7 @@ export class LspClient {
   }
 
   // ocaml
-  public ocamlTypedHoles(params: OcamlTypedHoleParams): PromiseLike<Range[] | null> {
+  public ocamlTypedHoles(params: OcamlTypedHolesParams): PromiseLike<Range[] | null> {
     return this.endpoint.send('ocamllsp/typedHoles', params);
   }
 
@@ -130,5 +132,9 @@ export class LspClient {
 
   public ocamlInferIntf(params: OcamlInferIntfParams): PromiseLike<string | null> {
     return this.endpoint.send('ocamllsp/inferIntf', params);
+  }
+
+  public ocamlMerlinCallCompatible(params: OcamlMerlinCallCompatibleParams): PromiseLike<OcamlMerlinCallCompatibleResponse> {
+    return this.endpoint.send('ocamllsp/merlinCallCompatible', params);
   }
 }

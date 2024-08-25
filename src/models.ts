@@ -3962,7 +3962,7 @@ export interface RelatedUnchangedDocumentDiagnosticReport extends UnchangedDocum
   relatedDocuments?: FullDocumentDiagnosticReport | UnchangedDocumentDiagnosticReport;
 }
 
-export interface OcamlTypedHoleParams {
+export interface OcamlTypedHolesParams {
   uri: DocumentUri;
 }
 
@@ -3974,4 +3974,16 @@ export interface OcamlHoverExtendedParams {
 
 export interface OcamlInferIntfParams {
   uri: DocumentUri;
+}
+
+export interface OcamlMerlinCallCompatibleParams {
+  uri: DocumentUri;
+  command: string;
+  args: string[];
+  resultAsSexp: boolean;
+}
+
+export interface OcamlMerlinCallCompatibleResponse {
+  resultAsSexp: boolean;
+  result: string;
 }
